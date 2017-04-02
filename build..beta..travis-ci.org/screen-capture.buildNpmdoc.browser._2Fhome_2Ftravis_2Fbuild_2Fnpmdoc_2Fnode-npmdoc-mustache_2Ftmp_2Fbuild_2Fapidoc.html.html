@@ -1,0 +1,1031 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/janl/mustache.js">mustache (v2.3.0)</a>
+</h1>
+<h4>Logic-less {{mustache}} templates with JavaScript</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.mustache">module mustache</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Context">
+            function <span class="apidocSignatureSpan">mustache.</span>Context
+            <span class="apidocSignatureSpan">(view, parentContext)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Scanner">
+            function <span class="apidocSignatureSpan">mustache.</span>Scanner
+            <span class="apidocSignatureSpan">(string)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer">
+            function <span class="apidocSignatureSpan">mustache.</span>Writer
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.clearCache">
+            function <span class="apidocSignatureSpan">mustache.</span>clearCache
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.escape">
+            function <span class="apidocSignatureSpan">mustache.</span>escape
+            <span class="apidocSignatureSpan">(string)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.parse">
+            function <span class="apidocSignatureSpan">mustache.</span>parse
+            <span class="apidocSignatureSpan">(template, tags)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.render">
+            function <span class="apidocSignatureSpan">mustache.</span>render
+            <span class="apidocSignatureSpan">(template, view, partials)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.to_html">
+            function <span class="apidocSignatureSpan">mustache.</span>to_html
+            <span class="apidocSignatureSpan">(template, view, partials, send)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">mustache.</span>Context.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">mustache.</span>Scanner.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">mustache.</span>Writer.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">mustache.</span>tags</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">mustache.</span>name</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">mustache.</span>version</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.mustache.Context">module mustache.Context</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Context.Context">
+            function <span class="apidocSignatureSpan">mustache.</span>Context
+            <span class="apidocSignatureSpan">(view, parentContext)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.mustache.Context.prototype">module mustache.Context.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Context.prototype.lookup">
+            function <span class="apidocSignatureSpan">mustache.Context.prototype.</span>lookup
+            <span class="apidocSignatureSpan">(name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Context.prototype.push">
+            function <span class="apidocSignatureSpan">mustache.Context.prototype.</span>push
+            <span class="apidocSignatureSpan">(view)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.mustache.Scanner">module mustache.Scanner</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Scanner.Scanner">
+            function <span class="apidocSignatureSpan">mustache.</span>Scanner
+            <span class="apidocSignatureSpan">(string)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.mustache.Scanner.prototype">module mustache.Scanner.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Scanner.prototype.eos">
+            function <span class="apidocSignatureSpan">mustache.Scanner.prototype.</span>eos
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Scanner.prototype.scan">
+            function <span class="apidocSignatureSpan">mustache.Scanner.prototype.</span>scan
+            <span class="apidocSignatureSpan">(re)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Scanner.prototype.scanUntil">
+            function <span class="apidocSignatureSpan">mustache.Scanner.prototype.</span>scanUntil
+            <span class="apidocSignatureSpan">(re)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.mustache.Writer">module mustache.Writer</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.Writer">
+            function <span class="apidocSignatureSpan">mustache.</span>Writer
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.mustache.Writer.prototype">module mustache.Writer.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.prototype.clearCache">
+            function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>clearCache
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.prototype.escapedValue">
+            function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>escapedValue
+            <span class="apidocSignatureSpan">(token, context)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.prototype.parse">
+            function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>parse
+            <span class="apidocSignatureSpan">(template, tags)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.prototype.rawValue">
+            function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>rawValue
+            <span class="apidocSignatureSpan">(token)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.prototype.render">
+            function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>render
+            <span class="apidocSignatureSpan">(template, view, partials)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.prototype.renderInverted">
+            function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderInverted
+            <span class="apidocSignatureSpan">(token, context, partials, originalTemplate)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.prototype.renderPartial">
+            function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderPartial
+            <span class="apidocSignatureSpan">(token, context, partials)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.prototype.renderSection">
+            function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderSection
+            <span class="apidocSignatureSpan">(token, context, partials, originalTemplate)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.prototype.renderTokens">
+            function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderTokens
+            <span class="apidocSignatureSpan">(tokens, context, partials, originalTemplate)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.Writer.prototype.unescapedValue">
+            function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>unescapedValue
+            <span class="apidocSignatureSpan">(token, context)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mustache" id="apidoc.module.mustache">module mustache</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Context" id="apidoc.element.mustache.Context">
+        function <span class="apidocSignatureSpan">mustache.</span>Context
+        <span class="apidocSignatureSpan">(view, parentContext)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Context(view, parentContext) {
+  this.view = view;
+  this.cache = { '.': this.view };
+  this.parent = parentContext;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Scanner" id="apidoc.element.mustache.Scanner">
+        function <span class="apidocSignatureSpan">mustache.</span>Scanner
+        <span class="apidocSignatureSpan">(string)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Scanner(string) {
+  this.string = string;
+  this.tail = string;
+  this.pos = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer" id="apidoc.element.mustache.Writer">
+        function <span class="apidocSignatureSpan">mustache.</span>Writer
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Writer() {
+  this.cache = {};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.clearCache" id="apidoc.element.mustache.clearCache">
+        function <span class="apidocSignatureSpan">mustache.</span>clearCache
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function clearCache() {
+  return defaultWriter.clearCache();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.escape" id="apidoc.element.mustache.escape">
+        function <span class="apidocSignatureSpan">mustache.</span>escape
+        <span class="apidocSignatureSpan">(string)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function escapeHtml(string) {
+  return String(string).replace(/[&amp;&lt;&gt;"'`=\/]/g, function fromEntityMap (s) {
+    return entityMap[s];
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.parse" id="apidoc.element.mustache.parse">
+        function <span class="apidocSignatureSpan">mustache.</span>parse
+        <span class="apidocSignatureSpan">(template, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function parse(template, tags) {
+  return defaultWriter.parse(template, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+Mustache.render(
+  template  : String,
+  view      : Object,
+  partials? : Object,
+) =&gt; String
+
+Mustache.<span class="apidocCodeKeywordSpan">parse</span>(
+  template              : String,
+  tags = ['{{', '}}']   : Tags,
+) =&gt; String
+
+interface Tags [String, String]
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.render" id="apidoc.element.mustache.render">
+        function <span class="apidocSignatureSpan">mustache.</span>render
+        <span class="apidocSignatureSpan">(template, view, partials)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function render(template, view, partials) {
+  if (typeof template !== 'string') {
+    throw new TypeError('Invalid template! Template should be a "string" ' +
+                        'but "' + typeStr(template) + '" was given as the first ' +
+                        'argument for mustache#render(template, view, partials)');
+  }
+
+  return defaultWriter.render(template, view, partials);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var view = {
+  title: "Joe",
+  calc: function () {
+    return 2 + 4;
+  }
+};
+
+var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>("{{title}} spends {{calc}}", view);
+```
+
+In this example, the `Mustache.render` function takes two parameters: 1) the [mustache](http://mustache.github.com/) template and
+ 2) a `view` object that contains the data and code needed to render the template.
+
+## API
+
+Following is an [rtype](https://git.io/rtype) signature of the most commonly used functions.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.to_html" id="apidoc.element.mustache.to_html">
+        function <span class="apidocSignatureSpan">mustache.</span>to_html
+        <span class="apidocSignatureSpan">(template, view, partials, send)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function to_html(template, view, partials, send) {
+<span class="apidocCodeCommentSpan">  /*eslint-enable*/
+</span>
+  var result = mustache.render(template, view, partials);
+
+  if (isFunction(send)) {
+    send(result);
+  } else {
+    return result;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mustache.Context" id="apidoc.module.mustache.Context">module mustache.Context</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Context.Context" id="apidoc.element.mustache.Context.Context">
+        function <span class="apidocSignatureSpan">mustache.</span>Context
+        <span class="apidocSignatureSpan">(view, parentContext)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Context(view, parentContext) {
+  this.view = view;
+  this.cache = { '.': this.view };
+  this.parent = parentContext;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mustache.Context.prototype" id="apidoc.module.mustache.Context.prototype">module mustache.Context.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Context.prototype.lookup" id="apidoc.element.mustache.Context.prototype.lookup">
+        function <span class="apidocSignatureSpan">mustache.Context.prototype.</span>lookup
+        <span class="apidocSignatureSpan">(name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function lookup(name) {
+  var cache = this.cache;
+
+  var value;
+  if (cache.hasOwnProperty(name)) {
+    value = cache[name];
+  } else {
+    var context = this, names, index, lookupHit = false;
+
+    while (context) {
+      if (name.indexOf('.') &gt; 0) {
+        value = context.view;
+        names = name.split('.');
+        index = 0;
+
+<span class="apidocCodeCommentSpan">        /**
+         * Using the dot notion path in `name`, we descend through the
+         * nested objects.
+         *
+         * To be certain that the lookup has been successful, we have to
+         * check if the last object in the path actually has the property
+         * we are looking for. We store the result in `lookupHit`.
+         *
+         * This is specially necessary for when the value has been set to
+         * `undefined` and we want to avoid looking up parent contexts.
+         **/
+</span>        while (value != null &amp;&amp; index &lt; names.length) {
+          if (index === names.length - 1)
+            lookupHit = hasProperty(value, names[index]);
+
+          value = value[names[index++]];
+        }
+      } else {
+        value = context.view[name];
+        lookupHit = hasProperty(context.view, name);
+      }
+
+      if (lookupHit)
+        break;
+
+      context = context.parent;
+    }
+
+    cache[name] = value;
+  }
+
+  if (isFunction(value))
+    value = value.call(this.view);
+
+  return value;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Context.prototype.push" id="apidoc.element.mustache.Context.prototype.push">
+        function <span class="apidocSignatureSpan">mustache.Context.prototype.</span>push
+        <span class="apidocSignatureSpan">(view)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function push(view) {
+  return new Context(view, this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mustache.Scanner" id="apidoc.module.mustache.Scanner">module mustache.Scanner</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Scanner.Scanner" id="apidoc.element.mustache.Scanner.Scanner">
+        function <span class="apidocSignatureSpan">mustache.</span>Scanner
+        <span class="apidocSignatureSpan">(string)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Scanner(string) {
+  this.string = string;
+  this.tail = string;
+  this.pos = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mustache.Scanner.prototype" id="apidoc.module.mustache.Scanner.prototype">module mustache.Scanner.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Scanner.prototype.eos" id="apidoc.element.mustache.Scanner.prototype.eos">
+        function <span class="apidocSignatureSpan">mustache.Scanner.prototype.</span>eos
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function eos() {
+  return this.tail === '';
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Scanner.prototype.scan" id="apidoc.element.mustache.Scanner.prototype.scan">
+        function <span class="apidocSignatureSpan">mustache.Scanner.prototype.</span>scan
+        <span class="apidocSignatureSpan">(re)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function scan(re) {
+  var match = this.tail.match(re);
+
+  if (!match || match.index !== 0)
+    return '';
+
+  var string = match[0];
+
+  this.tail = this.tail.substring(string.length);
+  this.pos += string.length;
+
+  return string;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Scanner.prototype.scanUntil" id="apidoc.element.mustache.Scanner.prototype.scanUntil">
+        function <span class="apidocSignatureSpan">mustache.Scanner.prototype.</span>scanUntil
+        <span class="apidocSignatureSpan">(re)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function scanUntil(re) {
+  var index = this.tail.search(re), match;
+
+  switch (index) {
+    case -1:
+      match = this.tail;
+      this.tail = '';
+      break;
+    case 0:
+      match = '';
+      break;
+    default:
+      match = this.tail.substring(0, index);
+      this.tail = this.tail.substring(index);
+  }
+
+  this.pos += match.length;
+
+  return match;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mustache.Writer" id="apidoc.module.mustache.Writer">module mustache.Writer</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.Writer" id="apidoc.element.mustache.Writer.Writer">
+        function <span class="apidocSignatureSpan">mustache.</span>Writer
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Writer() {
+  this.cache = {};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mustache.Writer.prototype" id="apidoc.module.mustache.Writer.prototype">module mustache.Writer.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.prototype.clearCache" id="apidoc.element.mustache.Writer.prototype.clearCache">
+        function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>clearCache
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function clearCache() {
+  this.cache = {};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.prototype.escapedValue" id="apidoc.element.mustache.Writer.prototype.escapedValue">
+        function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>escapedValue
+        <span class="apidocSignatureSpan">(token, context)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function escapedValue(token, context) {
+  var value = context.lookup(token[1]);
+  if (value != null)
+    return mustache.escape(value);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.prototype.parse" id="apidoc.element.mustache.Writer.prototype.parse">
+        function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>parse
+        <span class="apidocSignatureSpan">(template, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function parse(template, tags) {
+  var cache = this.cache;
+  var tokens = cache[template];
+
+  if (tokens == null)
+    tokens = cache[template] = parseTemplate(template, tags);
+
+  return tokens;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+Mustache.render(
+  template  : String,
+  view      : Object,
+  partials? : Object,
+) =&gt; String
+
+Mustache.<span class="apidocCodeKeywordSpan">parse</span>(
+  template              : String,
+  tags = ['{{', '}}']   : Tags,
+) =&gt; String
+
+interface Tags [String, String]
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.prototype.rawValue" id="apidoc.element.mustache.Writer.prototype.rawValue">
+        function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>rawValue
+        <span class="apidocSignatureSpan">(token)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function rawValue(token) {
+  return token[1];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.prototype.render" id="apidoc.element.mustache.Writer.prototype.render">
+        function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>render
+        <span class="apidocSignatureSpan">(template, view, partials)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function render(template, view, partials) {
+  var tokens = this.parse(template);
+  var context = (view instanceof Context) ? view : new Context(view);
+  return this.renderTokens(tokens, context, partials, template);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var view = {
+  title: "Joe",
+  calc: function () {
+    return 2 + 4;
+  }
+};
+
+var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>("{{title}} spends {{calc}}", view);
+```
+
+In this example, the `Mustache.render` function takes two parameters: 1) the [mustache](http://mustache.github.com/) template and
+ 2) a `view` object that contains the data and code needed to render the template.
+
+## API
+
+Following is an [rtype](https://git.io/rtype) signature of the most commonly used functions.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.prototype.renderInverted" id="apidoc.element.mustache.Writer.prototype.renderInverted">
+        function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderInverted
+        <span class="apidocSignatureSpan">(token, context, partials, originalTemplate)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function renderInverted(token, context, partials, originalTemplate) {
+  var value = context.lookup(token[1]);
+
+  // Use JavaScript's definition of falsy. Include empty arrays.
+  // See https://github.com/janl/mustache.js/issues/186
+  if (!value || (isArray(value) &amp;&amp; value.length === 0))
+    return this.renderTokens(token[4], context, partials, originalTemplate);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.prototype.renderPartial" id="apidoc.element.mustache.Writer.prototype.renderPartial">
+        function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderPartial
+        <span class="apidocSignatureSpan">(token, context, partials)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function renderPartial(token, context, partials) {
+  if (!partials) return;
+
+  var value = isFunction(partials) ? partials(token[1]) : partials[token[1]];
+  if (value != null)
+    return this.renderTokens(this.parse(value), context, partials, value);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.prototype.renderSection" id="apidoc.element.mustache.Writer.prototype.renderSection">
+        function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderSection
+        <span class="apidocSignatureSpan">(token, context, partials, originalTemplate)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function renderSection(token, context, partials, originalTemplate) {
+  var self = this;
+  var buffer = '';
+  var value = context.lookup(token[1]);
+
+  // This function is used to render an arbitrary template
+  // in the current context by higher-order sections.
+  function subRender (template) {
+    return self.render(template, context, partials);
+  }
+
+  if (!value) return;
+
+  if (isArray(value)) {
+    for (var j = 0, valueLength = value.length; j &lt; valueLength; ++j) {
+      buffer += this.renderTokens(token[4], context.push(value[j]), partials, originalTemplate);
+    }
+  } else if (typeof value === 'object' || typeof value === 'string' || typeof value === 'number') {
+    buffer += this.renderTokens(token[4], context.push(value), partials, originalTemplate);
+  } else if (isFunction(value)) {
+    if (typeof originalTemplate !== 'string')
+      throw new Error('Cannot use higher-order sections without the original template');
+
+    // Extract the portion of the original template that the section contains.
+    value = value.call(context.view, originalTemplate.slice(token[3], token[5]), subRender);
+
+    if (value != null)
+      buffer += value;
+  } else {
+    buffer += this.renderTokens(token[4], context, partials, originalTemplate);
+  }
+  return buffer;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.prototype.renderTokens" id="apidoc.element.mustache.Writer.prototype.renderTokens">
+        function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderTokens
+        <span class="apidocSignatureSpan">(tokens, context, partials, originalTemplate)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function renderTokens(tokens, context, partials, originalTemplate) {
+  var buffer = '';
+
+  var token, symbol, value;
+  for (var i = 0, numTokens = tokens.length; i &lt; numTokens; ++i) {
+    value = undefined;
+    token = tokens[i];
+    symbol = token[0];
+
+    if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
+    else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
+    else if (symbol === '&gt;') value = this.renderPartial(token, context, partials, originalTemplate);
+    else if (symbol === '&amp;') value = this.unescapedValue(token, context);
+    else if (symbol === 'name') value = this.escapedValue(token, context);
+    else if (symbol === 'text') value = this.rawValue(token);
+
+    if (value !== undefined)
+      buffer += value;
+  }
+
+  return buffer;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.Writer.prototype.unescapedValue" id="apidoc.element.mustache.Writer.prototype.unescapedValue">
+        function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>unescapedValue
+        <span class="apidocSignatureSpan">(token, context)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function unescapedValue(token, context) {
+  var value = context.lookup(token[1]);
+  if (value != null)
+    return value;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
