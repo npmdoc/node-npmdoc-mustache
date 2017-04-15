@@ -1,11 +1,13 @@
 # api documentation for  [mustache (v2.3.0)](https://github.com/janl/mustache.js)  [![npm package](https://img.shields.io/npm/v/npmdoc-mustache.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-mustache) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-mustache.svg)](https://travis-ci.org/npmdoc/node-npmdoc-mustache)
 #### Logic-less {{mustache}} templates with JavaScript
 
-[![NPM](https://nodei.co/npm/mustache.png?downloads=true)](https://www.npmjs.com/package/mustache)
+[![NPM](https://nodei.co/npm/mustache.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/mustache)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-mustache/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-mustache_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-mustache/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-mustache/build/screenCapture.buildCi.browser.apidoc.html.png)](https://npmdoc.github.io/node-npmdoc-mustache/build/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-mustache/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-mustache/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-mustache/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 
@@ -15,8 +17,7 @@
 
 {
     "author": {
-        "name": "mustache.js Authors",
-        "email": "http://github.com/janl/mustache.js"
+        "name": "mustache.js Authors"
     },
     "bin": {
         "mustache": "./bin/mustache"
@@ -64,29 +65,23 @@
     "main": "./mustache.js",
     "maintainers": [
         {
-            "name": "dasilvacontin",
-            "email": "dasilvacontin@gmail.com"
+            "name": "dasilvacontin"
         },
         {
-            "name": "flipp",
-            "email": "johphi@gmail.com"
+            "name": "flipp"
         },
         {
-            "name": "jan",
-            "email": "jan@apache.org"
+            "name": "jan"
         },
         {
-            "name": "mjackson",
-            "email": "mjijackson@gmail.com"
+            "name": "mjackson"
         },
         {
-            "name": "nathan",
-            "email": "nrstott@gmail.com"
+            "name": "nathan"
         }
     ],
     "name": "mustache",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/janl/mustache.js.git"
@@ -126,6 +121,7 @@
 1.  [function <span class="apidocSignatureSpan">mustache.</span>parse (template, tags)](#apidoc.element.mustache.parse)
 1.  [function <span class="apidocSignatureSpan">mustache.</span>render (template, view, partials)](#apidoc.element.mustache.render)
 1.  [function <span class="apidocSignatureSpan">mustache.</span>to_html (template, view, partials, send)](#apidoc.element.mustache.to_html)
+1.  object <span class="apidocSignatureSpan"></span>mustache
 1.  object <span class="apidocSignatureSpan">mustache.</span>Context.prototype
 1.  object <span class="apidocSignatureSpan">mustache.</span>Scanner.prototype
 1.  object <span class="apidocSignatureSpan">mustache.</span>Writer.prototype
@@ -162,6 +158,19 @@
 1.  [function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderSection (token, context, partials, originalTemplate)](#apidoc.element.mustache.Writer.prototype.renderSection)
 1.  [function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderTokens (tokens, context, partials, originalTemplate)](#apidoc.element.mustache.Writer.prototype.renderTokens)
 1.  [function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>unescapedValue (token, context)](#apidoc.element.mustache.Writer.prototype.unescapedValue)
+
+#### [module mustache.mustache](#apidoc.module.mustache.mustache)
+1.  [function <span class="apidocSignatureSpan">mustache.mustache.</span>Context (view, parentContext)](#apidoc.element.mustache.mustache.Context)
+1.  [function <span class="apidocSignatureSpan">mustache.mustache.</span>Scanner (string)](#apidoc.element.mustache.mustache.Scanner)
+1.  [function <span class="apidocSignatureSpan">mustache.mustache.</span>Writer ()](#apidoc.element.mustache.mustache.Writer)
+1.  [function <span class="apidocSignatureSpan">mustache.mustache.</span>clearCache ()](#apidoc.element.mustache.mustache.clearCache)
+1.  [function <span class="apidocSignatureSpan">mustache.mustache.</span>escape (string)](#apidoc.element.mustache.mustache.escape)
+1.  [function <span class="apidocSignatureSpan">mustache.mustache.</span>parse (template, tags)](#apidoc.element.mustache.mustache.parse)
+1.  [function <span class="apidocSignatureSpan">mustache.mustache.</span>render (template, view, partials)](#apidoc.element.mustache.mustache.render)
+1.  [function <span class="apidocSignatureSpan">mustache.mustache.</span>to_html (template, view, partials, send)](#apidoc.element.mustache.mustache.to_html)
+1.  object <span class="apidocSignatureSpan">mustache.mustache.</span>tags
+1.  string <span class="apidocSignatureSpan">mustache.mustache.</span>name
+1.  string <span class="apidocSignatureSpan">mustache.mustache.</span>version
 
 
 
@@ -216,7 +225,23 @@ function clearCache() {
 ```
 - example usage
 ```shell
-n/a
+...
+// All high-level mustache.* functions use this writer.
+var defaultWriter = new Writer();
+
+/**
+ * Clears all cached templates in the default writer.
+ */
+mustache.clearCache = function clearCache () {
+  return defaultWriter.clearCache();
+};
+
+/**
+ * Parses and caches the given template in the default writer and returns the
+ * array of tokens it contains. Doing this ahead of time avoids the need to
+ * parse templates on the fly as they are rendered.
+ */
+...
 ```
 
 #### <a name="apidoc.element.mustache.escape"></a>[function <span class="apidocSignatureSpan">mustache.</span>escape (string)](#apidoc.element.mustache.escape)
@@ -230,7 +255,23 @@ function escapeHtml(string) {
 ```
 - example usage
 ```shell
-n/a
+...
+  if (value != null)
+    return value;
+};
+
+Writer.prototype.escapedValue = function escapedValue (token, context) {
+  var value = context.lookup(token[1]);
+  if (value != null)
+    return mustache.escape(value);
+};
+
+Writer.prototype.rawValue = function rawValue (token) {
+  return token[1];
+};
+
+mustache.name = 'mustache.js';
+...
 ```
 
 #### <a name="apidoc.element.mustache.parse"></a>[function <span class="apidocSignatureSpan">mustache.</span>parse (template, tags)](#apidoc.element.mustache.parse)
@@ -394,7 +435,22 @@ function lookup(name) {
 ```
 - example usage
 ```shell
-n/a
+...
+
+return buffer;
+  };
+
+  Writer.prototype.renderSection = function renderSection (token, context, partials, originalTemplate) {
+var self = this;
+var buffer = '';
+var value = context.lookup(token[1]);
+
+// This function is used to render an arbitrary template
+// in the current context by higher-order sections.
+function subRender (template) {
+  return self.render(template, context, partials);
+}
+...
 ```
 
 #### <a name="apidoc.element.mustache.Context.prototype.push"></a>[function <span class="apidocSignatureSpan">mustache.Context.prototype.</span>push (view)](#apidoc.element.mustache.Context.prototype.push)
@@ -406,7 +462,22 @@ function push(view) {
 ```
 - example usage
 ```shell
-n/a
+...
+      value = scanner.scanUntil(openingTagRe);
+
+      if (value) {
+        for (var i = 0, valueLength = value.length; i < valueLength; ++i) {
+chr = value.charAt(i);
+
+if (isWhitespace(chr)) {
+  spaces.push(tokens.length);
+} else {
+  nonSpace = true;
+}
+
+tokens.push([ 'text', chr, start, start + 1 ]);
+start += 1;
+...
 ```
 
 
@@ -440,7 +511,23 @@ function eos() {
 ```
 - example usage
 ```shell
-n/a
+...
+    }
+
+    compileTags(tags || mustache.tags);
+
+    var scanner = new Scanner(template);
+
+    var start, type, value, chr, token, openSection;
+    while (!scanner.eos()) {
+start = scanner.pos;
+
+// Match any text between tags.
+value = scanner.scanUntil(openingTagRe);
+
+if (value) {
+  for (var i = 0, valueLength = value.length; i < valueLength; ++i) {
+...
 ```
 
 #### <a name="apidoc.element.mustache.Scanner.prototype.scan"></a>[function <span class="apidocSignatureSpan">mustache.Scanner.prototype.</span>scan (re)](#apidoc.element.mustache.Scanner.prototype.scan)
@@ -462,7 +549,23 @@ function scan(re) {
 ```
 - example usage
 ```shell
-n/a
+...
+    // Check for whitespace on the current line.
+    if (chr === '\n')
+      stripSpace();
+  }
+}
+
+// Match the opening tag.
+if (!scanner.scan(openingTagRe))
+  break;
+
+hasTag = true;
+
+// Get the tag type.
+type = scanner.scan(tagRe) || 'name';
+scanner.scan(whiteRe);
+...
 ```
 
 #### <a name="apidoc.element.mustache.Scanner.prototype.scanUntil"></a>[function <span class="apidocSignatureSpan">mustache.Scanner.prototype.</span>scanUntil (re)](#apidoc.element.mustache.Scanner.prototype.scanUntil)
@@ -491,7 +594,23 @@ function scanUntil(re) {
 ```
 - example usage
 ```shell
-n/a
+...
+    var scanner = new Scanner(template);
+
+    var start, type, value, chr, token, openSection;
+    while (!scanner.eos()) {
+      start = scanner.pos;
+
+      // Match any text between tags.
+      value = scanner.scanUntil(openingTagRe);
+
+      if (value) {
+        for (var i = 0, valueLength = value.length; i < valueLength; ++i) {
+chr = value.charAt(i);
+
+if (isWhitespace(chr)) {
+  spaces.push(tokens.length);
+...
 ```
 
 
@@ -523,7 +642,23 @@ function clearCache() {
 ```
 - example usage
 ```shell
-n/a
+...
+// All high-level mustache.* functions use this writer.
+var defaultWriter = new Writer();
+
+/**
+ * Clears all cached templates in the default writer.
+ */
+mustache.clearCache = function clearCache () {
+  return defaultWriter.clearCache();
+};
+
+/**
+ * Parses and caches the given template in the default writer and returns the
+ * array of tokens it contains. Doing this ahead of time avoids the need to
+ * parse templates on the fly as they are rendered.
+ */
+...
 ```
 
 #### <a name="apidoc.element.mustache.Writer.prototype.escapedValue"></a>[function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>escapedValue (token, context)](#apidoc.element.mustache.Writer.prototype.escapedValue)
@@ -537,7 +672,23 @@ function escapedValue(token, context) {
 ```
 - example usage
 ```shell
-n/a
+...
+  token = tokens[i];
+  symbol = token[0];
+
+  if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
+  else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
+  else if (symbol === '>') value = this.renderPartial(token, context, partials, originalTemplate);
+  else if (symbol === '&') value = this.unescapedValue(token, context);
+  else if (symbol === 'name') value = this.escapedValue(token, context);
+  else if (symbol === 'text') value = this.rawValue(token);
+
+  if (value !== undefined)
+    buffer += value;
+}
+
+return buffer;
+...
 ```
 
 #### <a name="apidoc.element.mustache.Writer.prototype.parse"></a>[function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>parse (template, tags)](#apidoc.element.mustache.Writer.prototype.parse)
@@ -582,7 +733,23 @@ function rawValue(token) {
 ```
 - example usage
 ```shell
-n/a
+...
+    symbol = token[0];
+
+    if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
+    else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
+    else if (symbol === '>') value = this.renderPartial(token, context, partials, originalTemplate);
+    else if (symbol === '&') value = this.unescapedValue(token, context);
+    else if (symbol === 'name') value = this.escapedValue(token, context);
+    else if (symbol === 'text') value = this.rawValue(token);
+
+    if (value !== undefined)
+      buffer += value;
+  }
+
+  return buffer;
+};
+...
 ```
 
 #### <a name="apidoc.element.mustache.Writer.prototype.render"></a>[function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>render (template, view, partials)](#apidoc.element.mustache.Writer.prototype.render)
@@ -630,7 +797,23 @@ function renderInverted(token, context, partials, originalTemplate) {
 ```
 - example usage
 ```shell
-n/a
+...
+    var token, symbol, value;
+    for (var i = 0, numTokens = tokens.length; i < numTokens; ++i) {
+value = undefined;
+token = tokens[i];
+symbol = token[0];
+
+if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
+else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
+else if (symbol === '>') value = this.renderPartial(token, context, partials, originalTemplate);
+else if (symbol === '&') value = this.unescapedValue(token, context);
+else if (symbol === 'name') value = this.escapedValue(token, context);
+else if (symbol === 'text') value = this.rawValue(token);
+
+if (value !== undefined)
+  buffer += value;
+...
 ```
 
 #### <a name="apidoc.element.mustache.Writer.prototype.renderPartial"></a>[function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderPartial (token, context, partials)](#apidoc.element.mustache.Writer.prototype.renderPartial)
@@ -646,7 +829,23 @@ function renderPartial(token, context, partials) {
 ```
 - example usage
 ```shell
-n/a
+...
+for (var i = 0, numTokens = tokens.length; i < numTokens; ++i) {
+  value = undefined;
+  token = tokens[i];
+  symbol = token[0];
+
+  if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
+  else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
+  else if (symbol === '>') value = this.renderPartial(token, context, partials, originalTemplate);
+  else if (symbol === '&') value = this.unescapedValue(token, context);
+  else if (symbol === 'name') value = this.escapedValue(token, context);
+  else if (symbol === 'text') value = this.rawValue(token);
+
+  if (value !== undefined)
+    buffer += value;
+}
+...
 ```
 
 #### <a name="apidoc.element.mustache.Writer.prototype.renderSection"></a>[function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderSection (token, context, partials, originalTemplate)](#apidoc.element.mustache.Writer.prototype.renderSection)
@@ -688,7 +887,23 @@ function renderSection(token, context, partials, originalTemplate) {
 ```
 - example usage
 ```shell
-n/a
+...
+
+    var token, symbol, value;
+    for (var i = 0, numTokens = tokens.length; i < numTokens; ++i) {
+value = undefined;
+token = tokens[i];
+symbol = token[0];
+
+if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
+else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
+else if (symbol === '>') value = this.renderPartial(token, context, partials, originalTemplate);
+else if (symbol === '&') value = this.unescapedValue(token, context);
+else if (symbol === 'name') value = this.escapedValue(token, context);
+else if (symbol === 'text') value = this.rawValue(token);
+
+if (value !== undefined)
+...
 ```
 
 #### <a name="apidoc.element.mustache.Writer.prototype.renderTokens"></a>[function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>renderTokens (tokens, context, partials, originalTemplate)](#apidoc.element.mustache.Writer.prototype.renderTokens)
@@ -719,7 +934,23 @@ function renderTokens(tokens, context, partials, originalTemplate) {
 ```
 - example usage
 ```shell
-n/a
+...
+ * names and templates of partials that are used in the template. It may
+ * also be a function that is used to load partial templates on the fly
+ * that takes a single argument: the name of the partial.
+ */
+Writer.prototype.render = function render (template, view, partials) {
+  var tokens = this.parse(template);
+  var context = (view instanceof Context) ? view : new Context(view);
+  return this.renderTokens(tokens, context, partials, template);
+};
+
+/**
+ * Low-level method that renders the given array of 'tokens' using
+ * the given 'context' and 'partials'.
+ *
+ * Note: The 'originalTemplate' is only ever used to extract the portion
+...
 ```
 
 #### <a name="apidoc.element.mustache.Writer.prototype.unescapedValue"></a>[function <span class="apidocSignatureSpan">mustache.Writer.prototype.</span>unescapedValue (token, context)](#apidoc.element.mustache.Writer.prototype.unescapedValue)
@@ -729,6 +960,205 @@ function unescapedValue(token, context) {
   var value = context.lookup(token[1]);
   if (value != null)
     return value;
+}
+```
+- example usage
+```shell
+...
+  value = undefined;
+  token = tokens[i];
+  symbol = token[0];
+
+  if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
+  else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
+  else if (symbol === '>') value = this.renderPartial(token, context, partials, originalTemplate);
+  else if (symbol === '&') value = this.unescapedValue(token, context);
+  else if (symbol === 'name') value = this.escapedValue(token, context);
+  else if (symbol === 'text') value = this.rawValue(token);
+
+  if (value !== undefined)
+    buffer += value;
+}
+...
+```
+
+
+
+# <a name="apidoc.module.mustache.mustache"></a>[module mustache.mustache](#apidoc.module.mustache.mustache)
+
+#### <a name="apidoc.element.mustache.mustache.Context"></a>[function <span class="apidocSignatureSpan">mustache.mustache.</span>Context (view, parentContext)](#apidoc.element.mustache.mustache.Context)
+- description and source-code
+```javascript
+function Context(view, parentContext) {
+  this.view = view;
+  this.cache = { '.': this.view };
+  this.parent = parentContext;
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.mustache.mustache.Scanner"></a>[function <span class="apidocSignatureSpan">mustache.mustache.</span>Scanner (string)](#apidoc.element.mustache.mustache.Scanner)
+- description and source-code
+```javascript
+function Scanner(string) {
+  this.string = string;
+  this.tail = string;
+  this.pos = 0;
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.mustache.mustache.Writer"></a>[function <span class="apidocSignatureSpan">mustache.mustache.</span>Writer ()](#apidoc.element.mustache.mustache.Writer)
+- description and source-code
+```javascript
+function Writer() {
+  this.cache = {};
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.mustache.mustache.clearCache"></a>[function <span class="apidocSignatureSpan">mustache.mustache.</span>clearCache ()](#apidoc.element.mustache.mustache.clearCache)
+- description and source-code
+```javascript
+function clearCache() {
+  return defaultWriter.clearCache();
+}
+```
+- example usage
+```shell
+...
+// All high-level mustache.* functions use this writer.
+var defaultWriter = new Writer();
+
+/**
+ * Clears all cached templates in the default writer.
+ */
+mustache.clearCache = function clearCache () {
+  return defaultWriter.clearCache();
+};
+
+/**
+ * Parses and caches the given template in the default writer and returns the
+ * array of tokens it contains. Doing this ahead of time avoids the need to
+ * parse templates on the fly as they are rendered.
+ */
+...
+```
+
+#### <a name="apidoc.element.mustache.mustache.escape"></a>[function <span class="apidocSignatureSpan">mustache.mustache.</span>escape (string)](#apidoc.element.mustache.mustache.escape)
+- description and source-code
+```javascript
+function escapeHtml(string) {
+  return String(string).replace(/[&<>"''=\/]/g, function fromEntityMap (s) {
+    return entityMap[s];
+  });
+}
+```
+- example usage
+```shell
+...
+  if (value != null)
+    return value;
+};
+
+Writer.prototype.escapedValue = function escapedValue (token, context) {
+  var value = context.lookup(token[1]);
+  if (value != null)
+    return mustache.escape(value);
+};
+
+Writer.prototype.rawValue = function rawValue (token) {
+  return token[1];
+};
+
+mustache.name = 'mustache.js';
+...
+```
+
+#### <a name="apidoc.element.mustache.mustache.parse"></a>[function <span class="apidocSignatureSpan">mustache.mustache.</span>parse (template, tags)](#apidoc.element.mustache.mustache.parse)
+- description and source-code
+```javascript
+function parse(template, tags) {
+  return defaultWriter.parse(template, tags);
+}
+```
+- example usage
+```shell
+...
+'''js
+Mustache.render(
+  template  : String,
+  view      : Object,
+  partials? : Object,
+) => String
+
+Mustache.parse(
+  template              : String,
+  tags = ['{{', '}}']   : Tags,
+) => String
+
+interface Tags [String, String]
+'''
+...
+```
+
+#### <a name="apidoc.element.mustache.mustache.render"></a>[function <span class="apidocSignatureSpan">mustache.mustache.</span>render (template, view, partials)](#apidoc.element.mustache.mustache.render)
+- description and source-code
+```javascript
+function render(template, view, partials) {
+  if (typeof template !== 'string') {
+    throw new TypeError('Invalid template! Template should be a "string" ' +
+                        'but "' + typeStr(template) + '" was given as the first ' +
+                        'argument for mustache#render(template, view, partials)');
+  }
+
+  return defaultWriter.render(template, view, partials);
+}
+```
+- example usage
+```shell
+...
+var view = {
+  title: "Joe",
+  calc: function () {
+    return 2 + 4;
+  }
+};
+
+var output = Mustache.render("{{title}} spends {{calc}}", view);
+'''
+
+In this example, the 'Mustache.render' function takes two parameters: 1) the [mustache](http://mustache.github.com/) template and
+ 2) a 'view' object that contains the data and code needed to render the template.
+
+## API
+
+Following is an [rtype](https://git.io/rtype) signature of the most commonly used functions.
+...
+```
+
+#### <a name="apidoc.element.mustache.mustache.to_html"></a>[function <span class="apidocSignatureSpan">mustache.mustache.</span>to_html (template, view, partials, send)](#apidoc.element.mustache.mustache.to_html)
+- description and source-code
+```javascript
+function to_html(template, view, partials, send) {
+<span class="apidocCodeCommentSpan">  /*eslint-enable*/
+</span>
+  var result = mustache.render(template, view, partials);
+
+  if (isFunction(send)) {
+    send(result);
+  } else {
+    return result;
+  }
 }
 ```
 - example usage
