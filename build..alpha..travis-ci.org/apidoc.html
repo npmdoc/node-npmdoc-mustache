@@ -135,6 +135,12 @@
 
         <li>
 
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan"></span>mustache</span>
+
+        </li>
+
+        <li>
+
             <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">mustache.</span>Context.prototype</span>
 
         </li>
@@ -357,6 +363,100 @@
 
     </ol></li>
 
+    <li class="apidocModuleLi"><a href="#apidoc.module.mustache.mustache">module mustache.mustache</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.mustache.Context">
+            function <span class="apidocSignatureSpan">mustache.mustache.</span>Context
+            <span class="apidocSignatureSpan">(view, parentContext)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.mustache.Scanner">
+            function <span class="apidocSignatureSpan">mustache.mustache.</span>Scanner
+            <span class="apidocSignatureSpan">(string)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.mustache.Writer">
+            function <span class="apidocSignatureSpan">mustache.mustache.</span>Writer
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.mustache.clearCache">
+            function <span class="apidocSignatureSpan">mustache.mustache.</span>clearCache
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.mustache.escape">
+            function <span class="apidocSignatureSpan">mustache.mustache.</span>escape
+            <span class="apidocSignatureSpan">(string)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.mustache.parse">
+            function <span class="apidocSignatureSpan">mustache.mustache.</span>parse
+            <span class="apidocSignatureSpan">(template, tags)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.mustache.render">
+            function <span class="apidocSignatureSpan">mustache.mustache.</span>render
+            <span class="apidocSignatureSpan">(template, view, partials)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mustache.mustache.to_html">
+            function <span class="apidocSignatureSpan">mustache.mustache.</span>to_html
+            <span class="apidocSignatureSpan">(template, view, partials, send)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">mustache.mustache.</span>tags</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">mustache.mustache.</span>name</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">mustache.mustache.</span>version</span>
+
+        </li>
+
+    </ol></li>
+
 </ol></div>
 
 <div class="apidocSectionDiv">
@@ -422,7 +522,23 @@
     <li>description and source-code<pre class="apidocCodePre">function clearCache() {
   return defaultWriter.clearCache();
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// All high-level mustache.* functions use this writer.
+var defaultWriter = new Writer();
+
+/**
+ * Clears all cached templates in the default writer.
+ */
+mustache.clearCache = function clearCache () {
+  return defaultWriter.<span class="apidocCodeKeywordSpan">clearCache</span>();
+};
+
+/**
+ * Parses and caches the given template in the default writer and returns the
+ * array of tokens it contains. Doing this ahead of time avoids the need to
+ * parse templates on the fly as they are rendered.
+ */
+...</pre></li>
     </ul>
 
 
@@ -439,7 +555,23 @@
     return entityMap[s];
   });
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  if (value != null)
+    return value;
+};
+
+Writer.prototype.escapedValue = function escapedValue (token, context) {
+  var value = context.lookup(token[1]);
+  if (value != null)
+    return mustache.<span class="apidocCodeKeywordSpan">escape</span>(value);
+};
+
+Writer.prototype.rawValue = function rawValue (token) {
+  return token[1];
+};
+
+mustache.name = &#x27;mustache.js&#x27;;
+...</pre></li>
     </ul>
 
 
@@ -546,6 +678,8 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
 
 
 
+
+
 </div>
 
 <div class="apidocSectionDiv">
@@ -632,7 +766,22 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
 
   return value;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+return buffer;
+  };
+
+  Writer.prototype.renderSection = function renderSection (token, context, partials, originalTemplate) {
+var self = this;
+var buffer = &#x27;&#x27;;
+var value = context.<span class="apidocCodeKeywordSpan">lookup</span>(token[1]);
+
+// This function is used to render an arbitrary template
+// in the current context by higher-order sections.
+function subRender (template) {
+  return self.render(template, context, partials);
+}
+...</pre></li>
     </ul>
 
 
@@ -647,7 +796,22 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     <li>description and source-code<pre class="apidocCodePre">function push(view) {
   return new Context(view, this);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+      value = scanner.scanUntil(openingTagRe);
+
+      if (value) {
+        for (var i = 0, valueLength = value.length; i &#x3c; valueLength; ++i) {
+chr = value.charAt(i);
+
+if (isWhitespace(chr)) {
+  spaces.<span class="apidocCodeKeywordSpan">push</span>(tokens.length);
+} else {
+  nonSpace = true;
+}
+
+tokens.push([ &#x27;text&#x27;, chr, start, start + 1 ]);
+start += 1;
+...</pre></li>
     </ul>
 
 
@@ -689,7 +853,23 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     <li>description and source-code<pre class="apidocCodePre">function eos() {
   return this.tail === &#x27;&#x27;;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    }
+
+    compileTags(tags || mustache.tags);
+
+    var scanner = new Scanner(template);
+
+    var start, type, value, chr, token, openSection;
+    while (!scanner.<span class="apidocCodeKeywordSpan">eos</span>()) {
+start = scanner.pos;
+
+// Match any text between tags.
+value = scanner.scanUntil(openingTagRe);
+
+if (value) {
+  for (var i = 0, valueLength = value.length; i &#x3c; valueLength; ++i) {
+...</pre></li>
     </ul>
 
 
@@ -714,7 +894,23 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
 
   return string;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    // Check for whitespace on the current line.
+    if (chr === &#x27;\n&#x27;)
+      stripSpace();
+  }
+}
+
+// Match the opening tag.
+if (!scanner.<span class="apidocCodeKeywordSpan">scan</span>(openingTagRe))
+  break;
+
+hasTag = true;
+
+// Get the tag type.
+type = scanner.scan(tagRe) || &#x27;name&#x27;;
+scanner.scan(whiteRe);
+...</pre></li>
     </ul>
 
 
@@ -746,7 +942,23 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
 
   return match;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    var scanner = new Scanner(template);
+
+    var start, type, value, chr, token, openSection;
+    while (!scanner.eos()) {
+      start = scanner.pos;
+
+      // Match any text between tags.
+      value = scanner.<span class="apidocCodeKeywordSpan">scanUntil</span>(openingTagRe);
+
+      if (value) {
+        for (var i = 0, valueLength = value.length; i &#x3c; valueLength; ++i) {
+chr = value.charAt(i);
+
+if (isWhitespace(chr)) {
+  spaces.push(tokens.length);
+...</pre></li>
     </ul>
 
 
@@ -786,7 +998,23 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     <li>description and source-code<pre class="apidocCodePre">function clearCache() {
   this.cache = {};
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// All high-level mustache.* functions use this writer.
+var defaultWriter = new Writer();
+
+/**
+ * Clears all cached templates in the default writer.
+ */
+mustache.clearCache = function clearCache () {
+  return defaultWriter.<span class="apidocCodeKeywordSpan">clearCache</span>();
+};
+
+/**
+ * Parses and caches the given template in the default writer and returns the
+ * array of tokens it contains. Doing this ahead of time avoids the need to
+ * parse templates on the fly as they are rendered.
+ */
+...</pre></li>
     </ul>
 
 
@@ -803,7 +1031,23 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   if (value != null)
     return mustache.escape(value);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  token = tokens[i];
+  symbol = token[0];
+
+  if (symbol === &#x27;#&#x27;) value = this.renderSection(token, context, partials, originalTemplate);
+  else if (symbol === &#x27;^&#x27;) value = this.renderInverted(token, context, partials, originalTemplate);
+  else if (symbol === &#x27;&#x3e;&#x27;) value = this.renderPartial(token, context, partials, originalTemplate);
+  else if (symbol === &#x27;&#x26;&#x27;) value = this.unescapedValue(token, context);
+  else if (symbol === &#x27;name&#x27;) value = this.<span class="apidocCodeKeywordSpan">escapedValue</span>(token, context);
+  else if (symbol === &#x27;text&#x27;) value = this.rawValue(token);
+
+  if (value !== undefined)
+    buffer += value;
+}
+
+return buffer;
+...</pre></li>
     </ul>
 
 
@@ -854,7 +1098,23 @@ interface Tags [String, String]
     <li>description and source-code<pre class="apidocCodePre">function rawValue(token) {
   return token[1];
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    symbol = token[0];
+
+    if (symbol === &#x27;#&#x27;) value = this.renderSection(token, context, partials, originalTemplate);
+    else if (symbol === &#x27;^&#x27;) value = this.renderInverted(token, context, partials, originalTemplate);
+    else if (symbol === &#x27;&#x3e;&#x27;) value = this.renderPartial(token, context, partials, originalTemplate);
+    else if (symbol === &#x27;&#x26;&#x27;) value = this.unescapedValue(token, context);
+    else if (symbol === &#x27;name&#x27;) value = this.escapedValue(token, context);
+    else if (symbol === &#x27;text&#x27;) value = this.<span class="apidocCodeKeywordSpan">rawValue</span>(token);
+
+    if (value !== undefined)
+      buffer += value;
+  }
+
+  return buffer;
+};
+...</pre></li>
     </ul>
 
 
@@ -908,7 +1168,24 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   if (!value || (isArray(value) &#x26;&#x26; value.length === 0))
     return this.renderTokens(token[4], context, partials, originalTemplate);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    var token, symbol, value;
+    for (var i = 0, numTokens = tokens.length; i &#x3c; numTokens; ++i) {
+value = undefined;
+token = tokens[i];
+symbol = token[0];
+
+if (symbol === &#x27;#&#x27;) value = this.renderSection(token, context, partials, originalTemplate);
+else if (symbol === &#x27;^&#x27;) value = this.<span class="apidocCodeKeywordSpan">renderInverted</span>(token, context, partials
+, originalTemplate);
+else if (symbol === &#x27;&#x3e;&#x27;) value = this.renderPartial(token, context, partials, originalTemplate);
+else if (symbol === &#x27;&#x26;&#x27;) value = this.unescapedValue(token, context);
+else if (symbol === &#x27;name&#x27;) value = this.escapedValue(token, context);
+else if (symbol === &#x27;text&#x27;) value = this.rawValue(token);
+
+if (value !== undefined)
+  buffer += value;
+...</pre></li>
     </ul>
 
 
@@ -927,7 +1204,24 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   if (value != null)
     return this.renderTokens(this.parse(value), context, partials, value);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+for (var i = 0, numTokens = tokens.length; i &#x3c; numTokens; ++i) {
+  value = undefined;
+  token = tokens[i];
+  symbol = token[0];
+
+  if (symbol === &#x27;#&#x27;) value = this.renderSection(token, context, partials, originalTemplate);
+  else if (symbol === &#x27;^&#x27;) value = this.renderInverted(token, context, partials, originalTemplate);
+  else if (symbol === &#x27;&#x3e;&#x27;) value = this.<span class="apidocCodeKeywordSpan">renderPartial</span>(token, context,
+partials, originalTemplate);
+  else if (symbol === &#x27;&#x26;&#x27;) value = this.unescapedValue(token, context);
+  else if (symbol === &#x27;name&#x27;) value = this.escapedValue(token, context);
+  else if (symbol === &#x27;text&#x27;) value = this.rawValue(token);
+
+  if (value !== undefined)
+    buffer += value;
+}
+...</pre></li>
     </ul>
 
 
@@ -972,7 +1266,24 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   }
   return buffer;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+    var token, symbol, value;
+    for (var i = 0, numTokens = tokens.length; i &#x3c; numTokens; ++i) {
+value = undefined;
+token = tokens[i];
+symbol = token[0];
+
+if (symbol === &#x27;#&#x27;) value = this.<span class="apidocCodeKeywordSpan">renderSection</span>(token, context, partials, originalTemplate
+);
+else if (symbol === &#x27;^&#x27;) value = this.renderInverted(token, context, partials, originalTemplate);
+else if (symbol === &#x27;&#x3e;&#x27;) value = this.renderPartial(token, context, partials, originalTemplate);
+else if (symbol === &#x27;&#x26;&#x27;) value = this.unescapedValue(token, context);
+else if (symbol === &#x27;name&#x27;) value = this.escapedValue(token, context);
+else if (symbol === &#x27;text&#x27;) value = this.rawValue(token);
+
+if (value !== undefined)
+...</pre></li>
     </ul>
 
 
@@ -1006,7 +1317,23 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
 
   return buffer;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ * names and templates of partials that are used in the template. It may
+ * also be a function that is used to load partial templates on the fly
+ * that takes a single argument: the name of the partial.
+ */
+Writer.prototype.render = function render (template, view, partials) {
+  var tokens = this.parse(template);
+  var context = (view instanceof Context) ? view : new Context(view);
+  return this.<span class="apidocCodeKeywordSpan">renderTokens</span>(tokens, context, partials, template);
+};
+
+/**
+ * Low-level method that renders the given array of `tokens` using
+ * the given `context` and `partials`.
+ *
+ * Note: The `originalTemplate` is only ever used to extract the portion
+...</pre></li>
     </ul>
 
 
@@ -1023,8 +1350,238 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   if (value != null)
     return value;
 }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  value = undefined;
+  token = tokens[i];
+  symbol = token[0];
+
+  if (symbol === &#x27;#&#x27;) value = this.renderSection(token, context, partials, originalTemplate);
+  else if (symbol === &#x27;^&#x27;) value = this.renderInverted(token, context, partials, originalTemplate);
+  else if (symbol === &#x27;&#x3e;&#x27;) value = this.renderPartial(token, context, partials, originalTemplate);
+  else if (symbol === &#x27;&#x26;&#x27;) value = this.<span class="apidocCodeKeywordSpan">unescapedValue</span>(token, context);
+  else if (symbol === &#x27;name&#x27;) value = this.escapedValue(token, context);
+  else if (symbol === &#x27;text&#x27;) value = this.rawValue(token);
+
+  if (value !== undefined)
+    buffer += value;
+}
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mustache.mustache" id="apidoc.module.mustache.mustache">module mustache.mustache</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.mustache.Context" id="apidoc.element.mustache.mustache.Context">
+        function <span class="apidocSignatureSpan">mustache.mustache.</span>Context
+        <span class="apidocSignatureSpan">(view, parentContext)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Context(view, parentContext) {
+  this.view = view;
+  this.cache = { &#x27;.&#x27;: this.view };
+  this.parent = parentContext;
+}</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.mustache.Scanner" id="apidoc.element.mustache.mustache.Scanner">
+        function <span class="apidocSignatureSpan">mustache.mustache.</span>Scanner
+        <span class="apidocSignatureSpan">(string)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Scanner(string) {
+  this.string = string;
+  this.tail = string;
+  this.pos = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.mustache.Writer" id="apidoc.element.mustache.mustache.Writer">
+        function <span class="apidocSignatureSpan">mustache.mustache.</span>Writer
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Writer() {
+  this.cache = {};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.mustache.clearCache" id="apidoc.element.mustache.mustache.clearCache">
+        function <span class="apidocSignatureSpan">mustache.mustache.</span>clearCache
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function clearCache() {
+  return defaultWriter.clearCache();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// All high-level mustache.* functions use this writer.
+var defaultWriter = new Writer();
+
+/**
+ * Clears all cached templates in the default writer.
+ */
+mustache.clearCache = function clearCache () {
+  return defaultWriter.<span class="apidocCodeKeywordSpan">clearCache</span>();
+};
+
+/**
+ * Parses and caches the given template in the default writer and returns the
+ * array of tokens it contains. Doing this ahead of time avoids the need to
+ * parse templates on the fly as they are rendered.
+ */
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.mustache.escape" id="apidoc.element.mustache.mustache.escape">
+        function <span class="apidocSignatureSpan">mustache.mustache.</span>escape
+        <span class="apidocSignatureSpan">(string)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function escapeHtml(string) {
+  return String(string).replace(/[&#x26;&#x3c;&#x3e;&#x22;&#x27;`=\/]/g, function fromEntityMap (s) {
+    return entityMap[s];
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  if (value != null)
+    return value;
+};
+
+Writer.prototype.escapedValue = function escapedValue (token, context) {
+  var value = context.lookup(token[1]);
+  if (value != null)
+    return mustache.<span class="apidocCodeKeywordSpan">escape</span>(value);
+};
+
+Writer.prototype.rawValue = function rawValue (token) {
+  return token[1];
+};
+
+mustache.name = &#x27;mustache.js&#x27;;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.mustache.parse" id="apidoc.element.mustache.mustache.parse">
+        function <span class="apidocSignatureSpan">mustache.mustache.</span>parse
+        <span class="apidocSignatureSpan">(template, tags)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function parse(template, tags) {
+  return defaultWriter.parse(template, tags);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+Mustache.render(
+  template  : String,
+  view      : Object,
+  partials? : Object,
+) =&#x3e; String
+
+Mustache.<span class="apidocCodeKeywordSpan">parse</span>(
+  template              : String,
+  tags = [&#x27;{{&#x27;, &#x27;}}&#x27;]   : Tags,
+) =&#x3e; String
+
+interface Tags [String, String]
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.mustache.render" id="apidoc.element.mustache.mustache.render">
+        function <span class="apidocSignatureSpan">mustache.mustache.</span>render
+        <span class="apidocSignatureSpan">(template, view, partials)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function render(template, view, partials) {
+  if (typeof template !== &#x27;string&#x27;) {
+    throw new TypeError(&#x27;Invalid template! Template should be a &#x22;string&#x22; &#x27; +
+                        &#x27;but &#x22;&#x27; + typeStr(template) + &#x27;&#x22; was given as the first &#x27; +
+                        &#x27;argument for mustache#render(template, view, partials)&#x27;);
+  }
+
+  return defaultWriter.render(template, view, partials);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var view = {
+  title: &#x22;Joe&#x22;,
+  calc: function () {
+    return 2 + 4;
+  }
+};
+
+var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>(&#x22;{{title}} spends {{calc}}&#x22;, view);
+```
+
+In this example, the `Mustache.render` function takes two parameters: 1) the [mustache](http://mustache.github.com/) template and
+ 2) a `view` object that contains the data and code needed to render the template.
+
+## API
+
+Following is an [rtype](https://git.io/rtype) signature of the most commonly used functions.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.mustache.mustache.to_html" id="apidoc.element.mustache.mustache.to_html">
+        function <span class="apidocSignatureSpan">mustache.mustache.</span>to_html
+        <span class="apidocSignatureSpan">(template, view, partials, send)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function to_html(template, view, partials, send) {
+<span class="apidocCodeCommentSpan">  /*eslint-enable*/
+</span>
+  var result = mustache.render(template, view, partials);
+
+  if (isFunction(send)) {
+    send(result);
+  } else {
+    return result;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
 
 
 </div>
