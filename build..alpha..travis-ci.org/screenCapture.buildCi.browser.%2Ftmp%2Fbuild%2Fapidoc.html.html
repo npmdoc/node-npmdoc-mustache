@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/janl/mustache.js"
-
-    >mustache (v2.3.0)</a>
+    <a href="https://github.com/janl/mustache.js">mustache (v2.3.0)</a>
 </h1>
 <h4>Logic-less {{mustache}} templates with JavaScript</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.mustache">module mustache</a><ol>
 
@@ -767,7 +760,7 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function Context(view, parentContext) {
   this.view = view;
-  this.cache = { &#x27;.&#x27;: this.view };
+  this.cache = { '.': this.view };
   this.parent = parentContext;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -792,9 +785,9 @@
     var context = this, names, index, lookupHit = false;
 
     while (context) {
-      if (name.indexOf(&#x27;.&#x27;) &#x3e; 0) {
+      if (name.indexOf('.') &gt; 0) {
         value = context.view;
-        names = name.split(&#x27;.&#x27;);
+        names = name.split('.');
         index = 0;
 
 <span class="apidocCodeCommentSpan">        /**
@@ -808,7 +801,7 @@
          * This is specially necessary for when the value has been set to
          * `undefined` and we want to avoid looking up parent contexts.
          **/
-</span>        while (value != null &#x26;&#x26; index &#x3c; names.length) {
+</span>        while (value != null &amp;&amp; index &lt; names.length) {
           if (index === names.length - 1)
             lookupHit = hasProperty(value, names[index]);
 
@@ -878,7 +871,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function eos() {
-  return this.tail === &#x27;&#x27;;
+  return this.tail === '';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -896,7 +889,7 @@
   var match = this.tail.match(re);
 
   if (!match || match.index !== 0)
-    return &#x27;&#x27;;
+    return '';
 
   var string = match[0];
 
@@ -923,10 +916,10 @@
   switch (index) {
     case -1:
       match = this.tail;
-      this.tail = &#x27;&#x27;;
+      this.tail = '';
       break;
     case 0:
-      match = &#x27;&#x27;;
+      match = '';
       break;
     default:
       match = this.tail.substring(0, index);
@@ -1052,9 +1045,9 @@
     <li>description and source-code<pre class="apidocCodePre">function renderInverted(token, context, partials, originalTemplate) {
   var value = context.lookup(token[1]);
 
-  // Use JavaScript&#x27;s definition of falsy. Include empty arrays.
+  // Use JavaScript's definition of falsy. Include empty arrays.
   // See https://github.com/janl/mustache.js/issues/186
-  if (!value || (isArray(value) &#x26;&#x26; value.length === 0))
+  if (!value || (isArray(value) &amp;&amp; value.length === 0))
     return this.renderTokens(token[4], context, partials, originalTemplate);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -1090,7 +1083,7 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function renderSection(token, context, partials, originalTemplate) {
   var self = this;
-  var buffer = &#x27;&#x27;;
+  var buffer = '';
   var value = context.lookup(token[1]);
 
   // This function is used to render an arbitrary template
@@ -1102,14 +1095,14 @@
   if (!value) return;
 
   if (isArray(value)) {
-    for (var j = 0, valueLength = value.length; j &#x3c; valueLength; ++j) {
+    for (var j = 0, valueLength = value.length; j &lt; valueLength; ++j) {
       buffer += this.renderTokens(token[4], context.push(value[j]), partials, originalTemplate);
     }
-  } else if (typeof value === &#x27;object&#x27; || typeof value === &#x27;string&#x27; || typeof value === &#x27;number&#x27;) {
+  } else if (typeof value === 'object' || typeof value === 'string' || typeof value === 'number') {
     buffer += this.renderTokens(token[4], context.push(value), partials, originalTemplate);
   } else if (isFunction(value)) {
-    if (typeof originalTemplate !== &#x27;string&#x27;)
-      throw new Error(&#x27;Cannot use higher-order sections without the original template&#x27;);
+    if (typeof originalTemplate !== 'string')
+      throw new Error('Cannot use higher-order sections without the original template');
 
     // Extract the portion of the original template that the section contains.
     value = value.call(context.view, originalTemplate.slice(token[3], token[5]), subRender);
@@ -1134,20 +1127,20 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function renderTokens(tokens, context, partials, originalTemplate) {
-  var buffer = &#x27;&#x27;;
+  var buffer = '';
 
   var token, symbol, value;
-  for (var i = 0, numTokens = tokens.length; i &#x3c; numTokens; ++i) {
+  for (var i = 0, numTokens = tokens.length; i &lt; numTokens; ++i) {
     value = undefined;
     token = tokens[i];
     symbol = token[0];
 
-    if (symbol === &#x27;#&#x27;) value = this.renderSection(token, context, partials, originalTemplate);
-    else if (symbol === &#x27;^&#x27;) value = this.renderInverted(token, context, partials, originalTemplate);
-    else if (symbol === &#x27;&#x3e;&#x27;) value = this.renderPartial(token, context, partials, originalTemplate);
-    else if (symbol === &#x27;&#x26;&#x27;) value = this.unescapedValue(token, context);
-    else if (symbol === &#x27;name&#x27;) value = this.escapedValue(token, context);
-    else if (symbol === &#x27;text&#x27;) value = this.rawValue(token);
+    if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
+    else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
+    else if (symbol === '&gt;') value = this.renderPartial(token, context, partials, originalTemplate);
+    else if (symbol === '&amp;') value = this.unescapedValue(token, context);
+    else if (symbol === 'name') value = this.escapedValue(token, context);
+    else if (symbol === 'text') value = this.rawValue(token);
 
     if (value !== undefined)
       buffer += value;
@@ -1200,7 +1193,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function escapeHtml(string) {
-  return String(string).replace(/[&#x26;&#x3c;&#x3e;&#x22;&#x27;`=\/]/g, function fromEntityMap (s) {
+  return String(string).replace(/[&amp;&lt;&gt;"'`=\/]/g, function fromEntityMap (s) {
     return entityMap[s];
   });
 }</pre></li>
@@ -1225,12 +1218,12 @@ Mustache.render(
   template  : String,
   view      : Object,
   partials? : Object,
-) =&#x3e; String
+) =&gt; String
 
 Mustache.<span class="apidocCodeKeywordSpan">parse</span>(
   template              : String,
-  tags = [&#x27;{{&#x27;, &#x27;}}&#x27;]   : Tags,
-) =&#x3e; String
+  tags = ['{{', '}}']   : Tags,
+) =&gt; String
 
 interface Tags [String, String]
 ```
@@ -1247,23 +1240,23 @@ interface Tags [String, String]
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function render(template, view, partials) {
-  if (typeof template !== &#x27;string&#x27;) {
-    throw new TypeError(&#x27;Invalid template! Template should be a &#x22;string&#x22; &#x27; +
-                        &#x27;but &#x22;&#x27; + typeStr(template) + &#x27;&#x22; was given as the first &#x27; +
-                        &#x27;argument for mustache#render(template, view, partials)&#x27;);
+  if (typeof template !== 'string') {
+    throw new TypeError('Invalid template! Template should be a "string" ' +
+                        'but "' + typeStr(template) + '" was given as the first ' +
+                        'argument for mustache#render(template, view, partials)');
   }
 
   return defaultWriter.render(template, view, partials);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 var view = {
-  title: &#x22;Joe&#x22;,
+  title: "Joe",
   calc: function () {
     return 2 + 4;
   }
 };
 
-var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>(&#x22;{{title}} spends {{calc}}&#x22;, view);
+var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>("{{title}} spends {{calc}}", view);
 ```
 
 In this example, the `Mustache.render` function takes two parameters: 1) the [mustache](http://mustache.github.com/) template and
@@ -1326,7 +1319,7 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function Context(view, parentContext) {
   this.view = view;
-  this.cache = { &#x27;.&#x27;: this.view };
+  this.cache = { '.': this.view };
   this.parent = parentContext;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -1356,9 +1349,9 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     var context = this, names, index, lookupHit = false;
 
     while (context) {
-      if (name.indexOf(&#x27;.&#x27;) &#x3e; 0) {
+      if (name.indexOf('.') &gt; 0) {
         value = context.view;
-        names = name.split(&#x27;.&#x27;);
+        names = name.split('.');
         index = 0;
 
 <span class="apidocCodeCommentSpan">        /**
@@ -1372,7 +1365,7 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
          * This is specially necessary for when the value has been set to
          * `undefined` and we want to avoid looking up parent contexts.
          **/
-</span>        while (value != null &#x26;&#x26; index &#x3c; names.length) {
+</span>        while (value != null &amp;&amp; index &lt; names.length) {
           if (index === names.length - 1)
             lookupHit = hasProperty(value, names[index]);
 
@@ -1439,9 +1432,9 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     var context = this, names, index, lookupHit = false;
 
     while (context) {
-      if (name.indexOf(&#x27;.&#x27;) &#x3e; 0) {
+      if (name.indexOf('.') &gt; 0) {
         value = context.view;
-        names = name.split(&#x27;.&#x27;);
+        names = name.split('.');
         index = 0;
 
 <span class="apidocCodeCommentSpan">        /**
@@ -1455,7 +1448,7 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
          * This is specially necessary for when the value has been set to
          * `undefined` and we want to avoid looking up parent contexts.
          **/
-</span>        while (value != null &#x26;&#x26; index &#x3c; names.length) {
+</span>        while (value != null &amp;&amp; index &lt; names.length) {
           if (index === names.length - 1)
             lookupHit = hasProperty(value, names[index]);
 
@@ -1540,7 +1533,7 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function eos() {
-  return this.tail === &#x27;&#x27;;
+  return this.tail === '';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1558,7 +1551,7 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   var match = this.tail.match(re);
 
   if (!match || match.index !== 0)
-    return &#x27;&#x27;;
+    return '';
 
   var string = match[0];
 
@@ -1585,10 +1578,10 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   switch (index) {
     case -1:
       match = this.tail;
-      this.tail = &#x27;&#x27;;
+      this.tail = '';
       break;
     case 0:
-      match = &#x27;&#x27;;
+      match = '';
       break;
     default:
       match = this.tail.substring(0, index);
@@ -1617,7 +1610,7 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function eos() {
-  return this.tail === &#x27;&#x27;;
+  return this.tail === '';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1640,7 +1633,7 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   var match = this.tail.match(re);
 
   if (!match || match.index !== 0)
-    return &#x27;&#x27;;
+    return '';
 
   var string = match[0];
 
@@ -1672,10 +1665,10 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   switch (index) {
     case -1:
       match = this.tail;
-      this.tail = &#x27;&#x27;;
+      this.tail = '';
       break;
     case 0:
-      match = &#x27;&#x27;;
+      match = '';
       break;
     default:
       match = this.tail.substring(0, index);
@@ -1770,12 +1763,12 @@ Mustache.render(
   template  : String,
   view      : Object,
   partials? : Object,
-) =&#x3e; String
+) =&gt; String
 
 Mustache.<span class="apidocCodeKeywordSpan">parse</span>(
   template              : String,
-  tags = [&#x27;{{&#x27;, &#x27;}}&#x27;]   : Tags,
-) =&#x3e; String
+  tags = ['{{', '}}']   : Tags,
+) =&gt; String
 
 interface Tags [String, String]
 ```
@@ -1813,13 +1806,13 @@ interface Tags [String, String]
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 var view = {
-  title: &#x22;Joe&#x22;,
+  title: "Joe",
   calc: function () {
     return 2 + 4;
   }
 };
 
-var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>(&#x22;{{title}} spends {{calc}}&#x22;, view);
+var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>("{{title}} spends {{calc}}", view);
 ```
 
 In this example, the `Mustache.render` function takes two parameters: 1) the [mustache](http://mustache.github.com/) template and
@@ -1843,9 +1836,9 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     <li>description and source-code<pre class="apidocCodePre">function renderInverted(token, context, partials, originalTemplate) {
   var value = context.lookup(token[1]);
 
-  // Use JavaScript&#x27;s definition of falsy. Include empty arrays.
+  // Use JavaScript's definition of falsy. Include empty arrays.
   // See https://github.com/janl/mustache.js/issues/186
-  if (!value || (isArray(value) &#x26;&#x26; value.length === 0))
+  if (!value || (isArray(value) &amp;&amp; value.length === 0))
     return this.renderTokens(token[4], context, partials, originalTemplate);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -1881,7 +1874,7 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function renderSection(token, context, partials, originalTemplate) {
   var self = this;
-  var buffer = &#x27;&#x27;;
+  var buffer = '';
   var value = context.lookup(token[1]);
 
   // This function is used to render an arbitrary template
@@ -1893,14 +1886,14 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   if (!value) return;
 
   if (isArray(value)) {
-    for (var j = 0, valueLength = value.length; j &#x3c; valueLength; ++j) {
+    for (var j = 0, valueLength = value.length; j &lt; valueLength; ++j) {
       buffer += this.renderTokens(token[4], context.push(value[j]), partials, originalTemplate);
     }
-  } else if (typeof value === &#x27;object&#x27; || typeof value === &#x27;string&#x27; || typeof value === &#x27;number&#x27;) {
+  } else if (typeof value === 'object' || typeof value === 'string' || typeof value === 'number') {
     buffer += this.renderTokens(token[4], context.push(value), partials, originalTemplate);
   } else if (isFunction(value)) {
-    if (typeof originalTemplate !== &#x27;string&#x27;)
-      throw new Error(&#x27;Cannot use higher-order sections without the original template&#x27;);
+    if (typeof originalTemplate !== 'string')
+      throw new Error('Cannot use higher-order sections without the original template');
 
     // Extract the portion of the original template that the section contains.
     value = value.call(context.view, originalTemplate.slice(token[3], token[5]), subRender);
@@ -1925,20 +1918,20 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function renderTokens(tokens, context, partials, originalTemplate) {
-  var buffer = &#x27;&#x27;;
+  var buffer = '';
 
   var token, symbol, value;
-  for (var i = 0, numTokens = tokens.length; i &#x3c; numTokens; ++i) {
+  for (var i = 0, numTokens = tokens.length; i &lt; numTokens; ++i) {
     value = undefined;
     token = tokens[i];
     symbol = token[0];
 
-    if (symbol === &#x27;#&#x27;) value = this.renderSection(token, context, partials, originalTemplate);
-    else if (symbol === &#x27;^&#x27;) value = this.renderInverted(token, context, partials, originalTemplate);
-    else if (symbol === &#x27;&#x3e;&#x27;) value = this.renderPartial(token, context, partials, originalTemplate);
-    else if (symbol === &#x27;&#x26;&#x27;) value = this.unescapedValue(token, context);
-    else if (symbol === &#x27;name&#x27;) value = this.escapedValue(token, context);
-    else if (symbol === &#x27;text&#x27;) value = this.rawValue(token);
+    if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
+    else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
+    else if (symbol === '&gt;') value = this.renderPartial(token, context, partials, originalTemplate);
+    else if (symbol === '&amp;') value = this.unescapedValue(token, context);
+    else if (symbol === 'name') value = this.escapedValue(token, context);
+    else if (symbol === 'text') value = this.rawValue(token);
 
     if (value !== undefined)
       buffer += value;
@@ -2037,12 +2030,12 @@ Mustache.render(
   template  : String,
   view      : Object,
   partials? : Object,
-) =&#x3e; String
+) =&gt; String
 
 Mustache.<span class="apidocCodeKeywordSpan">parse</span>(
   template              : String,
-  tags = [&#x27;{{&#x27;, &#x27;}}&#x27;]   : Tags,
-) =&#x3e; String
+  tags = ['{{', '}}']   : Tags,
+) =&gt; String
 
 interface Tags [String, String]
 ```
@@ -2090,13 +2083,13 @@ interface Tags [String, String]
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 var view = {
-  title: &#x22;Joe&#x22;,
+  title: "Joe",
   calc: function () {
     return 2 + 4;
   }
 };
 
-var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>(&#x22;{{title}} spends {{calc}}&#x22;, view);
+var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>("{{title}} spends {{calc}}", view);
 ```
 
 In this example, the `Mustache.render` function takes two parameters: 1) the [mustache](http://mustache.github.com/) template and
@@ -2125,9 +2118,9 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     <li>description and source-code<pre class="apidocCodePre">function renderInverted(token, context, partials, originalTemplate) {
   var value = context.lookup(token[1]);
 
-  // Use JavaScript&#x27;s definition of falsy. Include empty arrays.
+  // Use JavaScript's definition of falsy. Include empty arrays.
   // See https://github.com/janl/mustache.js/issues/186
-  if (!value || (isArray(value) &#x26;&#x26; value.length === 0))
+  if (!value || (isArray(value) &amp;&amp; value.length === 0))
     return this.renderTokens(token[4], context, partials, originalTemplate);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -2173,7 +2166,7 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function renderSection(token, context, partials, originalTemplate) {
   var self = this;
-  var buffer = &#x27;&#x27;;
+  var buffer = '';
   var value = context.lookup(token[1]);
 
   // This function is used to render an arbitrary template
@@ -2185,14 +2178,14 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
   if (!value) return;
 
   if (isArray(value)) {
-    for (var j = 0, valueLength = value.length; j &#x3c; valueLength; ++j) {
+    for (var j = 0, valueLength = value.length; j &lt; valueLength; ++j) {
       buffer += this.renderTokens(token[4], context.push(value[j]), partials, originalTemplate);
     }
-  } else if (typeof value === &#x27;object&#x27; || typeof value === &#x27;string&#x27; || typeof value === &#x27;number&#x27;) {
+  } else if (typeof value === 'object' || typeof value === 'string' || typeof value === 'number') {
     buffer += this.renderTokens(token[4], context.push(value), partials, originalTemplate);
   } else if (isFunction(value)) {
-    if (typeof originalTemplate !== &#x27;string&#x27;)
-      throw new Error(&#x27;Cannot use higher-order sections without the original template&#x27;);
+    if (typeof originalTemplate !== 'string')
+      throw new Error('Cannot use higher-order sections without the original template');
 
     // Extract the portion of the original template that the section contains.
     value = value.call(context.view, originalTemplate.slice(token[3], token[5]), subRender);
@@ -2222,20 +2215,20 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function renderTokens(tokens, context, partials, originalTemplate) {
-  var buffer = &#x27;&#x27;;
+  var buffer = '';
 
   var token, symbol, value;
-  for (var i = 0, numTokens = tokens.length; i &#x3c; numTokens; ++i) {
+  for (var i = 0, numTokens = tokens.length; i &lt; numTokens; ++i) {
     value = undefined;
     token = tokens[i];
     symbol = token[0];
 
-    if (symbol === &#x27;#&#x27;) value = this.renderSection(token, context, partials, originalTemplate);
-    else if (symbol === &#x27;^&#x27;) value = this.renderInverted(token, context, partials, originalTemplate);
-    else if (symbol === &#x27;&#x3e;&#x27;) value = this.renderPartial(token, context, partials, originalTemplate);
-    else if (symbol === &#x27;&#x26;&#x27;) value = this.unescapedValue(token, context);
-    else if (symbol === &#x27;name&#x27;) value = this.escapedValue(token, context);
-    else if (symbol === &#x27;text&#x27;) value = this.rawValue(token);
+    if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
+    else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
+    else if (symbol === '&gt;') value = this.renderPartial(token, context, partials, originalTemplate);
+    else if (symbol === '&amp;') value = this.unescapedValue(token, context);
+    else if (symbol === 'name') value = this.escapedValue(token, context);
+    else if (symbol === 'text') value = this.rawValue(token);
 
     if (value !== undefined)
       buffer += value;
@@ -2303,7 +2296,7 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function escapeHtml(string) {
-  return String(string).replace(/[&#x26;&#x3c;&#x3e;&#x22;&#x27;`=\/]/g, function fromEntityMap (s) {
+  return String(string).replace(/[&amp;&lt;&gt;"'`=\/]/g, function fromEntityMap (s) {
     return entityMap[s];
   });
 }</pre></li>
@@ -2333,12 +2326,12 @@ Mustache.render(
   template  : String,
   view      : Object,
   partials? : Object,
-) =&#x3e; String
+) =&gt; String
 
 Mustache.<span class="apidocCodeKeywordSpan">parse</span>(
   template              : String,
-  tags = [&#x27;{{&#x27;, &#x27;}}&#x27;]   : Tags,
-) =&#x3e; String
+  tags = ['{{', '}}']   : Tags,
+) =&gt; String
 
 interface Tags [String, String]
 ```
@@ -2360,23 +2353,23 @@ interface Tags [String, String]
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function render(template, view, partials) {
-  if (typeof template !== &#x27;string&#x27;) {
-    throw new TypeError(&#x27;Invalid template! Template should be a &#x22;string&#x22; &#x27; +
-                        &#x27;but &#x22;&#x27; + typeStr(template) + &#x27;&#x22; was given as the first &#x27; +
-                        &#x27;argument for mustache#render(template, view, partials)&#x27;);
+  if (typeof template !== 'string') {
+    throw new TypeError('Invalid template! Template should be a "string" ' +
+                        'but "' + typeStr(template) + '" was given as the first ' +
+                        'argument for mustache#render(template, view, partials)');
   }
 
   return defaultWriter.render(template, view, partials);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 var view = {
-  title: &#x22;Joe&#x22;,
+  title: "Joe",
   calc: function () {
     return 2 + 4;
   }
 };
 
-var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>(&#x22;{{title}} spends {{calc}}&#x22;, view);
+var output = Mustache.<span class="apidocCodeKeywordSpan">render</span>("{{title}} spends {{calc}}", view);
 ```
 
 In this example, the `Mustache.render` function takes two parameters: 1) the [mustache](http://mustache.github.com/) template and
@@ -2425,3 +2418,4 @@ Following is an [rtype](https://git.io/rtype) signature of the most commonly use
     ]
 </div>
 </div>
+</body></html>
