@@ -1,4 +1,7 @@
-# api documentation for  [mustache (v2.3.0)](https://github.com/janl/mustache.js)  [![npm package](https://img.shields.io/npm/v/npmdoc-mustache.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-mustache) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-mustache.svg)](https://travis-ci.org/npmdoc/node-npmdoc-mustache)
+# npmdoc-mustache
+
+#### basic api documentation for  [mustache (v2.3.0)](https://github.com/janl/mustache.js)  [![npm package](https://img.shields.io/npm/v/npmdoc-mustache.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-mustache) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-mustache.svg)](https://travis-ci.org/npmdoc/node-npmdoc-mustache)
+
 #### Logic-less {{mustache}} templates with JavaScript
 
 [![NPM](https://nodei.co/npm/mustache.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/mustache)

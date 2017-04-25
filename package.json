@@ -1,7 +1,7 @@
 {
     "author": "kai zhu <kaizhu256@gmail.com>",
     "buildNpmdoc": "mustache",
-    "description": "api documentation for [mustache (v2.3.0)](https://github.com/janl/mustache.js) [![npm package](https://img.shields.io/npm/v/npmdoc-mustache.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-mustache) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-mustache.svg)](https://travis-ci.org/npmdoc/node-npmdoc-mustache)",
+    "description": "#### basic api documentation for  [mustache (v2.3.0)](https://github.com/janl/mustache.js)  [![npm package](https://img.shields.io/npm/v/npmdoc-mustache.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-mustache) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-mustache.svg)](https://travis-ci.org/npmdoc/node-npmdoc-mustache)",
     "devDependencies": {
         "electron-lite": "kaizhu256/node-electron-lite#alpha",
         "mustache": "*",
@@ -36,5 +36,5 @@
         "start": "(set -e; export PORT=${PORT:-8080}; utility2 start test.js)",
         "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
     },
-    "version": "0.0.3"
+    "version": "2017.4.26"
 }
